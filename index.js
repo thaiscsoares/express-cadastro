@@ -10,11 +10,16 @@ app.get('/emails', (req,res) => {
     res.send(cadastros)
 })
 
+app.get('/emails/:name', (req,res) => {
+    let email = cadastros[req.params.name]
+    res.send(email)
+})
+
 app.post('/cadastrar', (req,res)=> {
     if (!req.body.name || !req.body.email){
         return res.status(400).send({mensagem: "Nome e email são obrigatórios"})
     }
-    cadastros[req.body.nome] = req.body.email
+    cadastros[req.body.name] = req.body.email
     res.send({mensagem : 'Cadastro realizado com sucesso'})
 })
 
