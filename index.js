@@ -11,7 +11,9 @@ app.get('/emails', (req,res) => {
 })
 
 app.post('/cadastrar', (req,res)=> {
-    console.log(req.body);
+    if (!req.body.name || !req.body.email){
+        return res.status(400).send({mensagem: "Nome e email são obrigatórios"})
+    }
     cadastros[req.body.nome] = req.body.email
     res.send({mensagem : 'Cadastro realizado com sucesso'})
 })
